@@ -1,0 +1,101 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infighting</title>
+    <link rel="icon" href="icon.png" type="image/png">
+    <style>
+        body {
+            background-color: #7F3FB2;
+            font-family: "Oswald";
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: #fff;
+        }
+        #countdown {
+            font-size: 7rem;
+            font-weight: bold;
+            display: flex;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        .time-box {
+            text-align: center;
+        }
+        .label {
+            font-size: 1.4rem;
+            text-transform: normal;
+            display: block;
+            color: #fff;
+        }
+        .character-img {
+            max-width: 1000px; /* Adjust this to make the picture bigger or smaller */
+            height: auto;
+            border-radius: 15px; /* Gives the image soft rounded corners */
+            box-shadow: 0 4px 15px #7F3FB2;
+        }
+        @media (max-width: 768px) {
+            #countdown {
+                font-size: 2.5rem !important; /* Forces a smaller size on phones */
+                gap: 15px; /* Reduces space between numbers */
+                flex-wrap: wrap; /* Allows numbers to stack if the screen is tiny */
+            }
+
+            .label {
+                font-size: 0.9rem; /* Makes the "Days/Hours" text smaller */
+            }
+
+            .character-img {
+                max-width: 100%; /* Ensures the image doesn't go off-screen */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="countdown">
+        <div class="time-box"><span id="days">00</span><span class="label">Days</span></div>
+        <div class="time-box"><span id="hours">00</span><span class="label">Hours</span></div>
+        <div class="time-box"><span id="minutes">00</span><span class="label">Minutes</span></div>
+        <div class="time-box"><span id="seconds">00</span><span class="label">Seconds</span></div>
+    </div>
+
+    <img src="TheTomorrowIPaint.png" alt="Akiyama Mizuki" class="character-img">
+
+    <script>
+        // CHANGE YOUR DATE HERE
+        const targetDate = new Date("August 22, 2026 11:00:00").getTime();
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const difference = targetDate - now;
+
+            // Calculations for days, hours, minutes and seconds
+            const d = Math.floor(difference / (1000 * 60 * 60 * 24));
+            const h = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const m = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+            const s = Math.floor((difference % (1000 * 60)) / 1000);
+
+            // Display the result
+            document.getElementById("days").innerText = d.toString().padStart(2, '0');
+            document.getElementById("hours").innerText = h.toString().padStart(2, '0');
+            document.getElementById("minutes").innerText = m.toString().padStart(2, '0');
+            document.getElementById("seconds").innerText = s.toString().padStart(2, '0');
+
+            // If the countdown is finished
+            if (difference < 0) {
+                clearInterval(interval);
+                document.getElementById("countdown").innerHTML = "<h1>THE TIME HAS ARRIVED!</h1>";
+            }
+        }
+
+        // Run every second
+        const interval = setInterval(updateCountdown, 1000);
+        updateCountdown(); // Run once immediately
+    </script>
+</body>
+</html>
