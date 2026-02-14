@@ -38,6 +38,21 @@
             border-radius: 15px; /* Gives the image soft rounded corners */
             box-shadow: 0 4px 15px #7F3FB2;
         }
+        @media (max-width: 768px) {
+            #countdown {
+                font-size: 2.5rem !important; /* Forces a smaller size on phones */
+                gap: 15px; /* Reduces space between numbers */
+                flex-wrap: wrap; /* Allows numbers to stack if the screen is tiny */
+            }
+
+            .label {
+                font-size: 0.9rem; /* Makes the "Days/Hours" text smaller */
+            }
+
+            .character-img {
+                max-width: 100%; /* Ensures the image doesn't go off-screen */
+            }
+        }
     </style>
 </head>
 <body>
@@ -83,4 +98,5 @@
         updateCountdown(); // Run once immediately
     </script>
 </body>
+
 </html>
